@@ -27,6 +27,10 @@ To authenticate with the Salesforce REST API, the extension reads your browser's
 | `cookies` | Read the Salesforce session cookie to authenticate REST API calls to your org |
 | Host permissions (`*.salesforce.com`, etc.) | Required to run the content script on Salesforce pages |
 
+## Google API Limited Use
+
+The use of information received from Google APIs will adhere to the Chrome Web Store User Data Policy, including the Limited Use requirements.
+
 ## Contact
 
 If you have questions about this privacy policy, please open an issue at:

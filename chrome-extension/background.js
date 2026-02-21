@@ -33,21 +33,15 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
 });
 
 // ── Resolve session token from cookies ───────────────────────────────────────
-// Salesforce uses "sid" as the session cookie on most orgs.
-// Some SSO setups may use a different name — we try common ones.
+// Request only the specific named cookies needed — narrowest possible scope
+// per Chrome Web Store permissions policy.
 async function getSessionToken(apiBase) {
-    const allCookies = await chrome.cookies.getAll({ url: apiBase });
-
-    // Try known Salesforce session cookie names in priority order
     const names = ['sid', 'salesforce_sid', 'oid'];
+
     for (const name of names) {
-        const c = allCookies.find(x => x.name === name);
+        const c = await chrome.cookies.get({ url: apiBase, name });
         if (c) return c.value;
     }
-
-    // Last resort: pick any httpOnly cookie (likely to be the session)
-    const httpOnly = allCookies.find(c => c.httpOnly);
-    if (httpOnly) return httpOnly.value;
 
     throw new Error(
         `No session cookie found for ${apiBase}. ` +
