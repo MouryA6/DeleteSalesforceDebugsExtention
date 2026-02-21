@@ -1,0 +1,58 @@
+{
+    "manifest_version": 3,
+    "name": "Salesforce Debug Log Cleaner",
+    "version": "1.0.1",
+    "description": "Adds a 'Truly Delete All' button to the Salesforce Setup Debug Logs page to permanently delete all Apex debug logs via the REST API.",
+
+    "permissions": [
+        "activeTab",
+        "scripting",
+        "storage",
+        "cookies"
+    ],
+
+    "host_permissions": [
+        "https://*.salesforce.com/*",
+        "https://*.my.salesforce.com/*",
+        "https://*.lightning.force.com/*",
+        "https://*.salesforce-setup.com/*",
+        "https://*.my.salesforce-setup.com/*",
+        "https://*.visual.force.com/*"
+    ],
+
+    "content_scripts": [
+        {
+            "matches": [
+                "https://*.salesforce.com/*",
+                "https://*.my.salesforce.com/*",
+                "https://*.lightning.force.com/*",
+                "https://*.salesforce-setup.com/*",
+                "https://*.my.salesforce-setup.com/*",
+                "https://*.visual.force.com/*"
+            ],
+            "js": ["content.js"],
+            "run_at": "document_idle",
+            "all_frames": true
+        }
+    ],
+
+    "background": {
+        "service_worker": "background.js"
+    },
+
+    "action": {
+        "default_popup": "popup.html",
+        "default_title": "Salesforce Debug Log Cleaner",
+        "default_icon": {
+            "16": "icons/icon16.png",
+            "48": "icons/icon48.png",
+            "128": "icons/icon128.png"
+        }
+    },
+
+    "icons": {
+        "16": "icons/icon16.png",
+        "48": "icons/icon48.png",
+        "128": "icons/icon128.png"
+    }
+}
