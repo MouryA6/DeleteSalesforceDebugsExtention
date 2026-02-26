@@ -22,10 +22,8 @@ To authenticate with the Salesforce REST API, the extension reads your browser's
 
 | Permission | Why it's needed |
 |-----------|----------------|
-| `activeTab` | Detect if the current tab is the Salesforce Debug Logs page (to show the badge) |
-| `scripting` | Inject the "Truly Delete All" button into the Debug Logs page |
-| `cookies` | Read the Salesforce session cookie to authenticate REST API calls to your org |
-| Host permissions (`*.salesforce.com`, etc.) | Required to run the content script on Salesforce pages |
+| `cookies` | Read the Salesforce session cookie (`sid`) by name to authenticate REST API calls to your own Salesforce org via the background service worker. `document.cookie` cannot be used as an alternative because the API call is made from the background service worker context, not from a page context. The cookie value is never stored, shared, or sent anywhere other than back to your own Salesforce org. |
+| Host permissions (`*.salesforce.com`, `*.salesforce-setup.com`, `*.lightning.force.com`, `*.visual.force.com`) | Required to inject the button content script into Salesforce pages and to make authenticated REST API calls to the user's Salesforce org. Different orgs use different domain patterns and all are necessary. |
 
 ## Google API Limited Use
 

@@ -1,11 +1,10 @@
 {
     "manifest_version": 3,
     "name": "Salesforce Debug Log Cleaner",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "Adds a 'Truly Delete All' button to the Salesforce Setup Debug Logs page to permanently delete all Apex debug logs via the REST API.",
 
     "permissions": [
-        "activeTab",
         "cookies"
     ],
 
